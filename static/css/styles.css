@@ -3,7 +3,7 @@ body {
     font-family: 'Roboto', Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f9;
+    background-color: #17171b;
     color: #333;
     display: flex;
     justify-content: center;
@@ -13,7 +13,7 @@ body {
 
 /* Centered Container */
 .container {
-    background: #fff;
+    background: #27275f;
     padding: 40px;
     border-radius: 12px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
@@ -25,15 +25,19 @@ body {
 /* Header */
 h1 {
     font-size: 1.8rem;
-    color: #2c3e50;
+    color: #e0e5e9;
     margin-bottom: 20px;
 }
 
 h2 {
     font-size: 1.4rem;
-    color: #34495e;
+    color: #e0e5e9;
     margin-top: 20px;
     margin-bottom: 10px;
+}
+
+p {
+    color: #e0e5e9;
 }
 
 /* Form */
@@ -50,7 +54,7 @@ input[type="file"] {
     font-size: 0.9rem;
     width: 100%;
     cursor: pointer;
-    background: #f9f9f9;
+    background: #e0e5e9;
 }
 
 input[type="file"]:hover {
@@ -82,7 +86,7 @@ textarea {
     font-size: 0.9rem;
     border-radius: 8px;
     border: 1px solid #ccc;
-    background: #f9f9f9;
+    background: #deedfa;
     resize: none;
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
 }
@@ -91,5 +95,5 @@ textarea {
 footer {
     margin-top: 20px;
     font-size: 0.85rem;
-    color: #888;
+    color: #c6cace;
 }
