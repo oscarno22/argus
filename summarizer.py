@@ -1,6 +1,7 @@
 from flask import Flask, request, jsonify, render_template
 from transformers import pipeline
 import pdfplumber
+from pylatexenc.latex2text import LatexNodes2Text
 import os
 import re
 
@@ -12,11 +13,12 @@ summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
 
 # HELPER FUNCTIONS
 
-def parse_pdf(file_path):
-    with pdfplumber.open(file_path) as pdf:
-        return " ".join([page.extract_text() for page in pdf.pages])
+def parse_latex(file_path):
+    """Parse LaTeX file and extract text using pylatexenc."""
+    with open(file_path, 'r', encoding='utf-8') as latex_file:
+        latex_content = latex_file.read()
+    text = LatexNodes2Text().latex_to_text(latex_content)
     
-def clean_text(text):
     text = re.sub(r'\s+', ' ', text)
     text = re.sub(r'[^\w\s]', '', text)
     return text
@@ -36,12 +38,18 @@ def upload_article():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
 
+        # Check if file is a LaTeX file (based on file extension)
+        if not file.filename.endswith('.tex'):
+            os.remove(file_path)
+            return jsonify({"error": "Invalid file format. Please upload a .tex file."}), 400
+
         try:
-            text = clean_text(parse_pdf(file_path))
+            text = parse_latex(file_path)
             summary = summarizer(text, max_length=330, min_length=50, do_sample=False)
             os.remove(file_path)
             return jsonify({"summary": summary[0]['summary_text']})
         except Exception as e:
+            os.remove(file_path)
             return jsonify({"error": str(e)}), 500
 
 @app.route('/')
