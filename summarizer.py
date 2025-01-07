@@ -38,7 +38,7 @@ def upload_article():
 
         try:
             text = clean_text(parse_pdf(file_path))
-            summary = summarizer(text, max_length=100, min_length=50, do_sample=False)
+            summary = summarizer(text, max_length=330, min_length=50, do_sample=False)
             os.remove(file_path)
             return jsonify({"summary": summary[0]['summary_text']})
         except Exception as e:
