@@ -38,7 +38,6 @@ def upload_article():
         file_path = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
         file.save(file_path)
 
-        # Check if file is a LaTeX file (based on file extension)
         if not file.filename.endswith('.tex'):
             os.remove(file_path)
             return jsonify({"error": "Invalid file format. Please upload a .tex file."}), 400
