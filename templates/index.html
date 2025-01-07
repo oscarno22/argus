@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Summarizer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Link to external CSS -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>PDF Summarizer</h1>
+        <p>Upload a PDF file and get a concise summary instantly!</p>
+        <form id="uploadForm">
+            <input type="file" id="fileInput" accept="application/pdf" required>
+            <button type="submit">Upload & Summarize</button>
+        </form>
+        <h2>Summary</h2>
+        <textarea id="summaryOutput" placeholder="Your summary will appear here..." readonly></textarea>
+        <footer>
+            &copy; 2025 PDF Summarizer | Made with ❤️
+        </footer>
+    </div>
+    <!-- Link to external JavaScript -->
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

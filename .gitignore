@@ -1,0 +1,8 @@
+argus-env/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.env
+*.log
+.vscode/
