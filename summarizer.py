@@ -4,6 +4,7 @@ import pdfplumber
 from pylatexenc.latex2text import LatexNodes2Text
 import os
 import re
+import openai
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = 'uploads'
@@ -27,6 +28,9 @@ def parse_latex(file_path):
 
 @app.route('/upload', methods=['POST'])
 def upload_article():
+    API_KEY = open("api_key.txt", "r").read()
+    openai.api_key = API_KEY
+
     if 'file' not in request.files:
         return jsonify({"error": "No file part"}), 400
 
@@ -44,9 +48,18 @@ def upload_article():
 
         try:
             text = parse_latex(file_path)
-            summary = summarizer(text, max_length=330, min_length=50, do_sample=False)
+            prompt = "Please summarize this text: " + text
+            # summary = summarizer(text, max_length=330, min_length=50, do_sample=False)
+            response = openai.ChatCompletion.create(
+                model="gpt-3.5-turbo",
+                messages = [
+                    {"role": "user", "content": prompt}
+                ]
+            )
+
             os.remove(file_path)
-            return jsonify({"summary": summary[0]['summary_text']})
+            # return jsonify({"summary": summary[0]['summary_text']})
+            return response
         except Exception as e:
             os.remove(file_path)
             return jsonify({"error": str(e)}), 500

@@ -47,7 +47,7 @@ form.addEventListener('submit', async (e) => {
         }
 
         const data = await response.json();
-        summaryOutput.value = data.summary;
+        summaryOutput.value = data['choices'][0]['message']['content'];
     } catch (error) {
         alert(`An error occurred: ${error.message}`);
     } finally {
