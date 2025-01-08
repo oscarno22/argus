@@ -117,3 +117,20 @@ footer {
     0% { transform: translate(-50%, -50%) rotate(0deg); }
     100% { transform: translate(-50%, -50%) rotate(360deg); }
 }
+
+/* Main Content Wrapper */
+.main-content {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center horizontally */
+}
+
+/* Eyeball Image */
+.eyeball {
+    margin-bottom: 20px; /* Add spacing below the eyeball */
+    max-width: 100px; /* Limit the width of the image */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 50%; /* Optional: make it circular */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add some shadow */
+}
+
